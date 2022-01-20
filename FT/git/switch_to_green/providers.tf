@@ -20,4 +20,6 @@ provider "aws" {
 
 provider "cloudflare" {
    version = "~> 3.0"
+   email = "shadak1997@gmail.com"
+   api_key = var.api_key
 }
