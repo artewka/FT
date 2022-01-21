@@ -9,7 +9,7 @@
       with_items: "{{ roles }}"
       loop_control:
         loop_var: role
-      when: ('tag_Name_web-srv' in group_names)
+      when: ('tag_Name_web_srv' in group_names)
 
     - name: phpadm servers
       include_role:
@@ -17,7 +17,7 @@
       with_items: "{{ roles }}"
       loop_control:
         loop_var: role
-      when: ('tag_Name_phpmyadmin-srv' in group_names)
+      when: ('tag_Name_phpmyadmin_srv' in group_names)
 
     - name: db servers
       include_role:
@@ -25,5 +25,5 @@
       with_items: "{{ roles }}"
       loop_control:
         loop_var: role
-      when: ('tag_Name_db-srv' in group_names)
+      when: ('tag_Name_db_srv' in group_names)
 
