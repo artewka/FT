@@ -19,7 +19,7 @@
 
   - name: Generate index.html
     template: 
-      src: /FT/git/ansible/roles/nginx/templates/index.j2
+      src: /roles/nginx/templates/index.j2
       dest: /var/www/html/index.html
       mode: 0555
     notify: Restart Nginx
