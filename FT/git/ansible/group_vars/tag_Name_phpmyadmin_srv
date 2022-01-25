@@ -3,5 +3,5 @@ roles:
  - phpmyadmin
  - php
  
- mysql_ip:
-  - mysql_ip
+mysql_ip:
+ - mysql_ip
