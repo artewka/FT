@@ -6,7 +6,7 @@
     - name: get mysql ip
       debug:
         var: ansible_all_ipv4_addresses
-        register: mysql_ip
+      register: mysql_ip
       when: ('tag_Name_db_srv' in group_names)
   
     - name: web servers
