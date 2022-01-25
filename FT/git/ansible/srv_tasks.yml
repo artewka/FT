@@ -8,10 +8,6 @@
         var: ansible_all_ipv4_addresses
       register: mysql_ip
       when: ('tag_Name_db_srv' in group_names)
-      
-    - name: check output
-      debug: 
-        var: mysql_ip
   
     - name: web servers
       include_role:
