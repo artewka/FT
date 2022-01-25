@@ -2,3 +2,5 @@ roles:
  - nginx
  - phpmyadmin
  - php
+ 
+ mysql_ip: "{{ mysql_ip }}"
