@@ -43,5 +43,5 @@ output "blue_alb_dns" {
 }
   
 output "db_ip" {
-  value = module.db.public_ip
+  value = module.db[*].public_ip
 }
