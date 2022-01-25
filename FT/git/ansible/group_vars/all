@@ -1,2 +1,3 @@
 ---
 ansible_user                : ubuntu
+public_ip                   : "{{ ip }}"
