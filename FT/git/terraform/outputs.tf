@@ -42,6 +42,6 @@ output "blue_alb_dns" {
   value = aws_lb.blue.dns_name
 }
   
-output "db_ip" {
+output "public_ip" {
   value = module.db[*].public_ip
 }
