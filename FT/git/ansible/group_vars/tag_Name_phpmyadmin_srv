@@ -1,3 +1,4 @@
 roles:
  - nginx
  - phpmyadmin
+ - php

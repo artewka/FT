@@ -6,6 +6,28 @@
     name:
       - phpmyadmin
 
+- name: Add default username and password for MySQL connection.
+  lineinfile: >
+    dest={{ phpmyadmin_config_file }}
+    state=present
+    regexp="^.+\['{{ item.key }}'\].+$"
+    line="$cfg['Servers'][$i]['{{ item.key }}'] = '{{ item.value }}';"
+    insertbefore="^\?>"
+    mode=0644
+  with_items:
+    - key: host
+      value: "{{ pma_mysql_host }}"
+    - key: port
+      value: "{{ pma_mysql_port }}"
+    - key: socket
+      value: "{{ pma_mysql_socket }}"
+    - key: connect_type
+      value: "{{ pma_mysql_connect_type }}"
+    - key: user
+      value: "{{ pma_mysql_user }}"
+    - key: password
+      value: "{{ pma_mysql_password }}"
+
 - name: Create symb link for phpmyadm
   file:
       src: /usr/share/phpmyadmin
