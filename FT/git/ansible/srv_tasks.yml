@@ -4,8 +4,8 @@
   become: yes
   tasks:
     - name: get db private ip
-      ip: ansible_facts["ansible_all_ipv4_addresses"]
-      register: ip
+      set_fact: ansible_facts["ansible_all_ipv4_addresses"]
+        register: ip
       when: ('tag_Name_db_srv' in group_names)
   
     - name: web servers
