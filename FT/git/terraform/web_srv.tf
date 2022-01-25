@@ -18,7 +18,7 @@ module "vpc" {
    source = "./ec2"
 
     count                        = 2
-    subnet_id                    = element(module.vpc.public_subnet_ids[*],count.index)
+    subnet_id                    = element(module.vpc.private_subnet_ids[*],count.index)
     security_group               = [module.vpc.sg_public]
     user_data                    = false
     key_name                     = aws_key_pair.ssh_key.key_name
