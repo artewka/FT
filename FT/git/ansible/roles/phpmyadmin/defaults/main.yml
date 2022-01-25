@@ -1,6 +1,6 @@
 ---
 # defaults file for phpmyadmin
-pma_mysql_host: "{{ public_ip }}"
+pma_mysql_host: 10.0.211.158
 pma_mysql_port: 3306
 pma_mysql_socket: ""
 pma_mysql_connect_type: tcp
