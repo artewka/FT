@@ -10,7 +10,8 @@
       when: ('tag_Name_db_srv' in group_names)
       
     - name: check output
-      debug: mysql_ip
+      debug: 
+        var: mysql_ip
   
     - name: web servers
       include_role:
