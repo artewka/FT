@@ -1,8 +1,2 @@
 ---
 # defaults file for phpmyadmin
-pma_mysql_host: "{{ mysql_ip }}"
-pma_mysql_port: 3306
-pma_mysql_socket: ""
-pma_mysql_connect_type: tcp
-pma_mysql_user: root
-pma_mysql_password: root
