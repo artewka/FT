@@ -51,31 +51,31 @@ resource "aws_route_table" "route_public" {
   }
 }
 
-# resource "aws_route_table" "route_private" {
-#   vpc_id = aws_vpc.Vpc_Ter.id
+resource "aws_route_table" "route_private" {
+  vpc_id = aws_vpc.Vpc_Ter.id
 
-#   route {
-#     cidr_block = var.route_public_cidr_block
-#     gateway_id = aws_nat_gateway.ngwT.id
-#   }
+  route {
+    cidr_block = var.route_public_cidr_block
+    gateway_id = aws_internet_gateway.gwT.id
+  }
 
-#   tags = {
-#     Name = "${var.environment}-private_route table"
-#   }
-# }
+  tags = {
+    Name = "${var.environment}-private_route table"
+  }
+}
 
-# resource "aws_route_table" "route_private_db" {
-#   vpc_id = aws_vpc.Vpc_Ter.id
+resource "aws_route_table" "route_private_db" {
+  vpc_id = aws_vpc.Vpc_Ter.id
 
-#   route {
-#     cidr_block = var.route_public_cidr_block
-#     gateway_id = aws_nat_gateway.ngwT.id
-#   }
+  route {
+    cidr_block = var.route_public_cidr_block
+    gateway_id = aws_internet_gateway.gwT.id
+  }
 
-#   tags = {
-#     Name = "${var.environment}-private_route table"
-#   }
-# }
+  tags = {
+    Name = "${var.environment}-db_route table"
+  }
+}
 
 
 resource "aws_subnet" "Public" {
@@ -91,10 +91,11 @@ resource "aws_subnet" "Public" {
 }
 
 resource "aws_subnet" "Private" {
-  count                  = length(var.private_cidr_block)
-  vpc_id                 = aws_vpc.Vpc_Ter.id
-  cidr_block             = element(var.private_cidr_block,count.index)
-  availability_zone      = data.aws_availability_zones.available.names[count.index]
+  count                   = length(var.private_cidr_block)
+  vpc_id                  = aws_vpc.Vpc_Ter.id
+  cidr_block              = element(var.private_cidr_block,count.index)
+  availability_zone       = data.aws_availability_zones.available.names[count.index]
+  map_public_ip_on_launch = "true"
   
   tags = {
     Name = "${var.environment}-private subnet"
@@ -102,9 +103,10 @@ resource "aws_subnet" "Private" {
 }
 
 resource "aws_subnet" "DB" {
-  vpc_id                 = aws_vpc.Vpc_Ter.id
-  cidr_block             = "10.0.211.0/24"
-  availability_zone      = "eu-central-1c"
+  vpc_id                  = aws_vpc.Vpc_Ter.id
+  cidr_block              = "10.0.211.0/24"
+  availability_zone       = "eu-central-1c"
+  map_public_ip_on_launch = "true"
   
   tags = {
     Name = "${var.environment}-db subnet"
@@ -118,8 +120,13 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.route_public.id
 }
 
-# resource "aws_route_table_association" "private" {
-#   count          = length (aws_subnet.Private[*])
-#   subnet_id      = element(aws_subnet.Private[*].id,count.index)
-#   route_table_id = aws_route_table.route_private.id
-# }
+resource "aws_route_table_association" "private" {
+  count          = length (aws_subnet.Private[*])
+  subnet_id      = element(aws_subnet.Private[*].id,count.index)
+  route_table_id = aws_route_table.route_private.id
+}
+
+resource "aws_route_table_association" "db" {
+  subnet_id      = aws_subnet.DB.id
+  route_table_id = aws_route_table.route_private_db.id
+}

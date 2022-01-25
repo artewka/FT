@@ -1,3 +1,2 @@
 ---
 ansible_user                : ubuntu
-ansible_ssh_private_key_file: /home/artem.yakymchuk/Desktop/education/ansible_dynamic/ssh/ssh_ans.pem
