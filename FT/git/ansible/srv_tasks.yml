@@ -18,6 +18,7 @@
       when: ('tag_Name_web_srv' in group_names)
 
     - name: phpadm servers
+      pma_mysql_host: "{{ mysql_ip }}"
       include_role:
         name: "{{ role }}"
       with_items: "{{ roles }}"
