@@ -2,12 +2,7 @@
   hosts: all
   gather_facts: true
   become: yes
-  
-  pre_tasks: 
-    - set_fact: 
-        mysql_ip: "{{ ansible_all_ipv4_addresses }}"
-      when: ('tag_Name_db_srv' in group_names)
-  
+
   tasks:
     - name: web servers
       include_role:
