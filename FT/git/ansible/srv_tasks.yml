@@ -3,7 +3,7 @@
   gather_facts: true
   become: yes
   
-  pre-task: 
+  pre_tasks: 
     - set-fact: 
         mysql_ip: "{{ ansible_all_ipv4_addresses }}"
       when: ('tag_Name_db_srv' in group_names)
