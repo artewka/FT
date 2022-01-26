@@ -2,3 +2,11 @@ roles:
  - nginx
  - phpmyadmin
  - php
+
+phpmyadmin_config_file: /etc/phpmyadmin/config.inc.php
+pma_mysql_host: "{{ hostvars['tag_Name_db_srv'].mysql_ip }}"
+pma_mysql_port: 3306
+pma_mysql_socket: ""
+pma_mysql_connect_type: tcp
+pma_mysql_user: root
+pma_mysql_password: root
