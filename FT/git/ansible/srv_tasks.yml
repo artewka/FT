@@ -6,12 +6,8 @@
     - name: get mysql ip
       debug:
         var: ansible_all_ipv4_addresses
-      when: ('tag_Name_db_srv' in group_names)
       register: mysql_ip
-      
-    - name: print variable
-      debug:
-        var: mysql_ip
+      when: ('tag_Name_db_srv' in group_names)
   
     - name: web servers
       include_role:
@@ -24,10 +20,10 @@
     - name: phpadm servers
       include_role:
         name: "{{ role }}"
-        pma_mysql_host: "{{ mysql_ip }}"
       with_items: "{{ roles }}"
       loop_control:
         loop_var: role
+      pma_mysql_host: "{{ mysql_ip }}"
       when: ('tag_Name_phpmyadmin_srv' in group_names)
 
     - name: db servers
