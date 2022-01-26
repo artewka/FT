@@ -24,11 +24,11 @@
     - name: phpadm servers
       include_role:
         name: "{{ role }}"
+        pma_mysql_host: "{{ mysql_ip }}"
       with_items: "{{ roles }}"
       loop_control:
         loop_var: role
       when: ('tag_Name_phpmyadmin_srv' in group_names)
-      pma_mysql_host: "{{ mysql_ip }}"
 
     - name: db servers
       include_role:
