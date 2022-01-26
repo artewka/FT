@@ -48,8 +48,3 @@
     backup: yes
   notify:
       - Restart mysql
-      
- - name: get mysql ip
-   debug:
-     var: ansible_all_ipv4_addresses
-   register: mysql_ip
