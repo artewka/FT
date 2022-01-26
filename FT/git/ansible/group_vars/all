@@ -1,7 +1,7 @@
 ---
 ansible_user                : ubuntu
 phpmyadmin_config_file: /etc/phpmyadmin/config.inc.php
-pma_mysql_host: "{{ mysql_ip }}"
+pma_mysql_host: "{{ hostvars['all']['mysql_ip'] }}"
 pma_mysql_port: 3306
 pma_mysql_socket: ""
 pma_mysql_connect_type: tcp
