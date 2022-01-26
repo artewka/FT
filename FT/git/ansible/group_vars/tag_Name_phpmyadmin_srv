@@ -4,7 +4,7 @@ roles:
  - php
 
 phpmyadmin_config_file: /etc/phpmyadmin/config.inc.php
-pma_mysql_host: "{{ hostvars[inventory_hostname]['mysql_ip']['ansible_all_ipv4_addresses'] }}"
+pma_mysql_host: "{{ hostvars[inventory_hostname]['mysql_ip'] }}"
 pma_mysql_port: 3306
 pma_mysql_socket: ""
 pma_mysql_connect_type: tcp
