@@ -17,14 +17,6 @@ variable "public_cidr_block" {
     default = ["10.0.100.0/24", "10.0.200.0/24"]
 }
 
-variable "availability_zone" {
-    default = [
-        "eu-central-1a",
-        "eu-central-1b",
-        "eu-central-1c"
-    ] 
-}
-
 variable "private_cidr_block" {
     type    = list(string)
     default = ["10.0.110.0/24","10.0.210.0/24"]

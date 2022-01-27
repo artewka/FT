@@ -5,7 +5,7 @@
     state: latest
     name:
       - phpmyadmin
-
+      
 - name: Add default username and password for MySQL connection.
   lineinfile: >
     dest={{ phpmyadmin_config_file }}

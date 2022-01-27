@@ -48,3 +48,7 @@
     backup: yes
   notify:
       - Restart mysql
+      
+- name: Export ip to a 'host-fact'
+  set_fact:
+    mysql_ip: "{{ ansible_all_ipv4_addresses }}"
