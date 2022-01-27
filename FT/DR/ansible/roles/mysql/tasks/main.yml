@@ -1,0 +1,54 @@
+# tasks file for mysql
+- name: Installing Mysql
+  package:
+    name: mysql-server
+    state: latest
+    update_cache: yes
+    # loop:
+    #    - mysql-server
+    #    - mysql-client 
+    #    - python3-mysqldb
+    #    - libmysqlclient-dev
+
+- name: Installing Mysql
+  package:
+    name: python3-mysqldb
+    state: latest
+    update_cache: yes
+    # loop:
+    #    - mysql-server
+    #    - mysql-client 
+    #    - python3-mysqldb
+    #    - libmysqlclient-dev
+     
+- name: start and enable mysql
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+    
+- name: creating mysql credentials
+  mysql_user:
+    name: "{{db_user}}"
+    password: "{{db_pass}}"
+    priv: '*.*:ALL'
+    host: '%'
+    state: present
+
+# - name: creating medium_db
+#   mysql_db:
+#     name: "{{db_name}}"
+#     state: present
+    
+- name: Enable remote login
+  lineinfile:
+    path: /etc/mysql/mysql.conf.d/mysqld.cnf
+    regexp: '^bind-address'
+    line: 'bind-address = 0.0.0.0'
+    backup: yes
+  notify:
+      - Restart mysql
+      
+- name: Export ip to a 'host-fact'
+  set_fact:
+    mysql_ip: "{{ ansible_all_ipv4_addresses }}"
