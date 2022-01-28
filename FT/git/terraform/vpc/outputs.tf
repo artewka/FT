@@ -22,11 +22,16 @@ output "vpc_cidr_id" {
 }
 
 #Security group id for public subnet
-output "sg_public" {
+output "sg_web" {
   value = aws_security_group.web_srv.id
 }
 
 #Security group id for private subnet
-output "sg_private" {
+output "sg_db" {
   value = aws_security_group.db_srv.id
+}
+
+#Security group id for bastion subnet
+output "sg_bastion" {
+  value = aws_security_group.bastion_srv.id
 }
