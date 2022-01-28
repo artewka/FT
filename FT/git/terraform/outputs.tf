@@ -10,12 +10,16 @@ output "db_subnet_ids" {
   value = module.vpc.db_subnet_ids
 }
 
-output "sg_public_srv" {
-  value = module.vpc.sg_public
+output "sg_web_srv" {
+  value = module.vpc.sg_web
 }
 
-output "sg_private_srv" {
-  value = module.vpc.sg_private
+output "sg_db_srv" {
+  value = module.vpc.sg_db
+}
+
+output "sg_bastion_srv" {
+  value = module.vpc.sg_bastion
 }
 
 # output "bastion" {
