@@ -18,29 +18,29 @@ output "sg_private_srv" {
   value = module.vpc.sg_private
 }
 
-output "bastion" {
-  value = module.vpc.bastion
-}
+# output "bastion" {
+#   value = module.vpc.bastion
+# }
 
 output "vpc_cidr_id" {
   value = module.vpc.vpc_cidr_id
 }
 
-output "aws_web_instance_id" {
-  value = module.web[*].aws_instance_id
-}
+# output "aws_web_instance_id" {
+#   value = module.web[*].aws_instance_id
+# }
 
-output "aws_db_instance_id" {
-  value = module.db[*].aws_instance_id
-}
+# output "aws_db_instance_id" {
+#   value = module.db[*].aws_instance_id
+# }
 
-output "green_alb_dns" {
-  value = aws_lb.green.dns_name
-}
+# output "green_alb_dns" {
+#   value = aws_lb.green.dns_name
+# }
 
-output "blue_alb_dns" {
-  value = aws_lb.blue.dns_name
-}
+# output "blue_alb_dns" {
+#   value = aws_lb.blue.dns_name
+# }
   
 output "public_ip" {
   value = module.db[*].public_ip
