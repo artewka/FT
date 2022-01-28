@@ -42,7 +42,7 @@ module "vpc" {
     module "bastion" {
     source = "./ec2"
    
-    subnet_id                    = module.vpc.public_subnet_ids
+    subnet_id                    = module.vpc.public_subnet_ids[0]
     security_group               = [module.vpc.sg_bastion]
     user_data                    = false
     key_name                     = aws_key_pair.ssh_key.key_name
