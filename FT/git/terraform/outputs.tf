@@ -26,13 +26,13 @@ output "vpc_cidr_id" {
   value = module.vpc.vpc_cidr_id
 }
 
-# output "aws_web_instance_id" {
-#   value = module.web[*].aws_instance_id
-# }
+output "aws_web_instance_id" {
+  value = module.web[*].aws_instance_id
+}
 
-# output "aws_db_instance_id" {
-#   value = module.db[*].aws_instance_id
-# }
+output "aws_db_instance_id" {
+  value = module.db[*].aws_instance_id
+}
 
 # output "green_alb_dns" {
 #   value = aws_lb.green.dns_name
