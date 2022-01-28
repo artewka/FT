@@ -20,7 +20,7 @@ module "vpc" {
 
     count                        = 2
     subnet_id                    = element(module.vpc.private_subnet_ids[*],count.index)
-    security_group               = [module.vpc.sg_private]
+    security_group               = [module.vpc.sg_web]
     user_data                    = false
     key_name                     = aws_key_pair.ssh_key.key_name
     srv                          = "phpmyadmin"
@@ -43,7 +43,7 @@ module "vpc" {
     source = "./ec2"
    
     subnet_id                    = module.vpc.public_subnet_ids
-    security_group               = [module.vpc.sg_public]
+    security_group               = [module.vpc.sg_bastion]
     user_data                    = false
     key_name                     = aws_key_pair.ssh_key.key_name
     srv                          = "bastion"
