@@ -9,7 +9,7 @@ module "vpc" {
 
     count                        = 2
     subnet_id                    = element(module.vpc.private_subnet_ids[*],count.index)
-    security_group               = [module.vpc.sg_private]
+    security_group               = [module.vpc.sg_web]
     user_data                    = false
     key_name                     = aws_key_pair.ssh_key.key_name
     srv                          = "web"
