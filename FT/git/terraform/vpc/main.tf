@@ -1,3 +1,4 @@
+#create vpc
 resource "aws_vpc" "Vpc_Ter" {
   cidr_block  = var.cidr_block
   instance_tenancy = "default"
@@ -7,8 +8,10 @@ resource "aws_vpc" "Vpc_Ter" {
   }
 }
 
+#get availables zones from default region
 data "aws_availability_zones" "available" {}
 
+#create internet gateway
 resource "aws_internet_gateway" "gwT" {
   vpc_id = aws_vpc.Vpc_Ter.id
 
@@ -17,33 +20,36 @@ resource "aws_internet_gateway" "gwT" {
   }
 }
 
-# resource "aws_eip" "eip" {
-#   vpc = true
+#get static external ip for NAT Gateway
+resource "aws_eip" "eip" {
+  vpc = true
 
-#   tags = {
-#     Name = "${var.environment}-eip"
-#   }
-# }
+  tags = {
+    Name = "${var.environment}-eip"
+  }
+}
 
-# resource "aws_nat_gateway" "ngwT" {
+#create NAT Gateway
+resource "aws_nat_gateway" "ngwT" {
  
-#   allocation_id = aws_eip.eip.id
-#   subnet_id     = aws_subnet.Private[0].id
+  allocation_id = aws_eip.eip.id
+  subnet_id     = aws_subnet.Private[0].id
 
-#   tags = {
-#     Name = "${var.environment}-nat_gw"
-#   }
+  tags = {
+    Name = "${var.environment}-nat_gw"
+  }
 
-#   depends_on = [aws_internet_gateway.gwT, aws_eip.eip]
-# }
+  depends_on = [aws_internet_gateway.gwT, aws_eip.eip]
+}
 
 
+#Route tables
 resource "aws_route_table" "route_public" {
   vpc_id = aws_vpc.Vpc_Ter.id
 
   route {
     cidr_block = var.route_public_cidr_block
-    gateway_id = aws_internet_gateway.gwT.id
+    gateway_id = aws_nat_gateway.ngwT.id
   }
 
   tags = {
@@ -56,7 +62,7 @@ resource "aws_route_table" "route_private" {
 
   route {
     cidr_block = var.route_public_cidr_block
-    gateway_id = aws_internet_gateway.gwT.id
+    gateway_id = aws_nat_gateway.ngwT.id
   }
 
   tags = {
@@ -67,17 +73,13 @@ resource "aws_route_table" "route_private" {
 resource "aws_route_table" "route_private_db" {
   vpc_id = aws_vpc.Vpc_Ter.id
 
-  route {
-    cidr_block = var.route_public_cidr_block
-    gateway_id = aws_internet_gateway.gwT.id
-  }
-
   tags = {
     Name = "${var.environment}-db_route table"
   }
 }
 
 
+#Create subnets
 resource "aws_subnet" "Public" {
   count                   = length(var.public_cidr_block)
   vpc_id                  = aws_vpc.Vpc_Ter.id
@@ -114,6 +116,7 @@ resource "aws_subnet" "DB" {
 }
 
 
+#Associate route tables with subnets
 resource "aws_route_table_association" "public" {
   count          = length (aws_subnet.Public[*])
   subnet_id      = element(aws_subnet.Public[*].id,count.index)
