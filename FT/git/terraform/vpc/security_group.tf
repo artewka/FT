@@ -83,4 +83,5 @@ dynamic "ingress" {
     Name = "allow ssh"
   }
 }
+}
 
