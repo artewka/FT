@@ -49,7 +49,7 @@ resource "aws_route_table" "route_public" {
 
   route {
     cidr_block = var.route_public_cidr_block
-    gateway_id = aws_nat_gateway.ngwT.id
+    gateway_id = aws_internet_gateway.gwT.id
   }
 
   tags = {
