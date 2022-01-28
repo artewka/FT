@@ -1,8 +1,9 @@
-
+#Network module
 module "vpc" {
   source = "./vpc"
 }
 
+#Creating instances with tags (srv variable)
  module "web" {
    source = "./ec2"
 
