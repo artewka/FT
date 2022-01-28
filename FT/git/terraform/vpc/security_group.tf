@@ -1,3 +1,4 @@
+#security group for web-srv
 resource "aws_security_group" "web_srv" {
   name        = "${var.environment}-rules to open ports for web_srv"
   description = "Allow http inbound traffic"
@@ -25,6 +26,7 @@ resource "aws_security_group" "web_srv" {
   }
 }
 
+#security group for db-srv
 resource "aws_security_group" "db_srv" {
   name        = "${var.environment}-allow_ssh,mysql"
   description = "Allow ssh,mysql inbound traffic"
