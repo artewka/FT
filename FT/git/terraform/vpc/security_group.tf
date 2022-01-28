@@ -12,6 +12,7 @@ resource "aws_security_group" "web_srv" {
       protocol         = "tcp"
       cidr_blocks      = [var.public_cidr_block[0],var.public_cidr_block[1]]
   }
+}  
     egress {
       from_port        = 0
       to_port          = 0
