@@ -33,3 +33,11 @@ output "aws_db_instance_id" {
 output "public_ip" {
   value = module.db[*].public_ip
 }
+  
+output "green_alb_dns" {
+  value = aws_lb.green.dns_name
+}
+
+output "blue_alb_dns" {
+  value = aws_lb.blue.dns_name
+}
