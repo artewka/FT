@@ -72,8 +72,12 @@ resource "aws_route_table" "route_private" {
 
 resource "aws_route_table" "route_private_db" {
   vpc_id = aws_vpc.Vpc_Ter.id
-  gateway_id = aws_internet_gateway.gwT.id
-
+  
+  route {
+    cidr_block = var.route_public_cidr_block
+    gateway_id = aws_internet_gateway.gwT.id
+  }
+  
   tags = {
     Name = "${var.environment}-db_route table"
   }
