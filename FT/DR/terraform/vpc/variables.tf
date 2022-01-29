@@ -31,3 +31,8 @@ variable "private_count" {
     default = "1"
     type = string
 }
+
+#bastion ip (for access)
+variable "bastion_ip" {
+    default = ["176.36.140.253/32"]
+}
