@@ -24,7 +24,3 @@ output "sg_public" {
 output "sg_private" {
   value = aws_security_group.db_srv.id
 }
-
-output "bastion" {
-  value = aws_security_group.bastion.id
-}
