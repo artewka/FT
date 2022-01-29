@@ -30,8 +30,3 @@ output "sg_web" {
 output "sg_db" {
   value = aws_security_group.db_srv.id
 }
-
-#Security group id for bastion subnet
-output "sg_bastion" {
-  value = aws_security_group.bastion_srv.id
-}
