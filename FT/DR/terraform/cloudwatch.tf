@@ -16,7 +16,7 @@ resource "aws_cloudwatch_dashboard" "terraform" {
           "AWS/ApplicationELB", 
           "RequestCount", 
           "AvailabilityZone", 
-          "eu-central-1a" 
+          "us-east-1a" 
         ]
       ],
       "region": "eu-central-1",
