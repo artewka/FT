@@ -10,7 +10,7 @@ resource "aws_security_group" "web_srv" {
       from_port        = ingress.value
       to_port          = ingress.value
       protocol         = "tcp"
-      cidr_blocks      = [var.public_cidr_block[0],var.public_cidr_block[1],var.bastion_ip]
+      cidr_blocks      = [var.public_cidr_block[0],var.public_cidr_block[1],var.bastion_ip[0]]
   }
 }  
     egress {
@@ -39,7 +39,7 @@ dynamic "ingress" {
       from_port        = ingress.value
       to_port          = ingress.value
       protocol         = "tcp"
-      cidr_blocks      = [var.private_cidr_block[0],var.private_cidr_block[1],var.bastion_ip]
+      cidr_blocks      = [var.private_cidr_block[0],var.private_cidr_block[1],var.bastion_ip[0]]
     }
 }
 
