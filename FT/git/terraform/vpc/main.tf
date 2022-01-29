@@ -97,7 +97,7 @@ resource "aws_subnet" "Private" {
   vpc_id                  = aws_vpc.Vpc_Ter.id
   cidr_block              = element(var.private_cidr_block,count.index)
   availability_zone       = data.aws_availability_zones.available.names[count.index]
-  #map_public_ip_on_launch = "true"
+  map_public_ip_on_launch = "true"
   
   tags = {
     Name = "${var.environment}-private subnet"
@@ -108,7 +108,7 @@ resource "aws_subnet" "DB" {
   vpc_id                  = aws_vpc.Vpc_Ter.id
   cidr_block              = "10.0.211.0/24"
   availability_zone       = "eu-central-1c"
-  #map_public_ip_on_launch = "true"
+  map_public_ip_on_launch = "true"
   
   tags = {
     Name = "${var.environment}-db subnet"
