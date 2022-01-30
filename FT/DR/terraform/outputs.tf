@@ -18,10 +18,6 @@ output "sg_private_srv" {
   value = module.vpc.sg_private
 }
 
-output "bastion" {
-  value = module.vpc.bastion
-}
-
 output "vpc_cidr_id" {
   value = module.vpc.vpc_cidr_id
 }
