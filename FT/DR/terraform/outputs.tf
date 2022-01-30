@@ -10,12 +10,12 @@ output "db_subnet_ids" {
   value = module.vpc.db_subnet_ids
 }
 
-output "sg_public_srv" {
-  value = module.vpc.sg_public
+output "sg_web_srv" {
+  value = module.vpc.sg_web
 }
 
-output "sg_private_srv" {
-  value = module.vpc.sg_private
+output "sg_db_srv" {
+  value = module.vpc.sg_db
 }
 
 output "vpc_cidr_id" {
@@ -29,15 +29,15 @@ output "aws_web_instance_id" {
 output "aws_db_instance_id" {
   value = module.db[*].aws_instance_id
 }
-
+  
+output "public_ip" {
+  value = module.db[*].public_ip
+}
+  
 output "green_alb_dns" {
   value = aws_lb.green.dns_name
 }
 
 output "blue_alb_dns" {
   value = aws_lb.blue.dns_name
-}
-  
-output "public_ip" {
-  value = module.db[*].public_ip
 }
