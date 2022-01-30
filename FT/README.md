@@ -15,7 +15,7 @@ This repository holds:
 5. Ansible v2.9.6 or above
 
 ## Network diagram
-![network diagram](https://github.com/artewka/FT/tree/FT/FT/network_diagram.png)
+![network diagram](https://github.com/artewka/FT/blob/FT/FT/network_map.png)
 
 ## Preparations
 ### Create service accounts on AWS
