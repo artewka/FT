@@ -115,5 +115,5 @@ Go to `FT/git/terraform/vpc/variables.tf` and put to variable "bastion_ip" your 
 Go to `FT/FT/DR/terraform/vpc/variables.tf` and put to variable "bastion_ip" your external ip. It's will be entry point for configure infrasctructure
 
 2. Create S3 bucket for remote state with parameters from path: `FT/FT/DR/terraform/backend.tf`
-
+3. Change github path in pipelines to https://github.com/artewka/FT/tree/FT/FT/DR
 3. Run pipelines
