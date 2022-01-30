@@ -15,7 +15,7 @@ This repository holds:
 5. Ansible v2.9.6 or above
 
 ## Network diagram
-![network diagram](FT/FT/network_diagram.png)
+![network diagram](FT/network_diagram.png)
 
 ## Preparations
 ### Create service accounts on AWS
@@ -51,10 +51,10 @@ Please install additional plugins:
 2. Generate SSH key pair and copy the public key to `FT/git/terraform/ssh_ans.pub`
 
 3. Add AWS Access Key and AWS Secret Access Key IDs to Jenkins Credentials storage:
- - Go to the main dashboard and click on "Manage Jenkins"
- - Now, click on "Manage Credentials" under "Security" to store AWS Secret key and Access key
- - Click on "global" under "Stores scoped to Jenkins" --> "Add credentials"
- - On this page, you will be able to store the secrets. Click on the Kind drop-down and select AWS. Specify a names access_key and secret_key for the secretes, description, Access Key ID and Secret Access Key. Click on OK to store the secrets. 
+  - Go to the main dashboard and click on "Manage Jenkins"
+  - Now, click on "Manage Credentials" under "Security" to store AWS Secret key and Access key
+  - Click on "global" under "Stores scoped to Jenkins" --> "Add credentials"
+  - On this page, you will be able to store the secrets. Click on the Kind drop-down and select AWS. Specify a names access_key and secret_key for the secretes, description, Access Key ID and Secret Access Key. Click on OK to store the secrets. 
 
 4. Encrypt your AWS Access Key for Ansible with ansible-vault tool
 [Ansible docs](https://docs.ansible.com/ansible/latest/user_guide/vault.html)
@@ -70,35 +70,35 @@ Go to `FT/git/ansible/group_vars/tag_Name_db_srv` and change values for db_user 
 Go to `FT/git/terraform/vpc/variables.tf` and put to variable "bastion_ip" your external ip. It's will be entry point for configure infrasctructure
 
 4. Create Terraform job in Jenkins, follow this steps
- - Create new item => Pipeline
- - Choose option "This project is parameterized"
- - Add "Choice parametr" and in choices field type "apply destroy"
- - Add "Credential parametr" with your access_key and secret_key
- - Copy pipeline "infrastructure run"
+  - Create new item => Pipeline
+  - Choose option "This project is parameterized"
+  - Add "Choice parametr" and in choices field type "apply destroy"
+  - Add "Credential parametr" with your access_key and secret_key
+  - Copy pipeline "infrastructure run"
 
 5. Add vault secret and ssh private key to Jenkins credentials with follow names: vault and ssh_ansible
 
 6. Create Ansible job in Jenkins, follow this steps
- - Create new item => Pipeline
- - Choose option "This project is parameterized"
- - Add "Credential parametr" with your vault and ssh_ansible
- - Copy pipeline "ansible run"
+  - Create new item => Pipeline
+  - Choose option "This project is parameterized"
+  - Add "Credential parametr" with your vault and ssh_ansible
+  - Copy pipeline "ansible run"
 
 7. Create S3 bucket for remote state with parameters from path: `FT/FT/git/terraform/backend.tf`
 
 8. Add Cloudlfare api key to Jenkins credentials with name cloudlfare_api_key
 
 9. Create Cloudlfare job in Jenkins for green stack, follow this steps
- - Create new item => Pipeline
- - Choose option "This project is parameterized"
- - Add "Credential parametr" with your cloudflare_api_key, access_key and secret_key (from AWS)
- - Copy pipeline "Change-to-green"
+  - Create new item => Pipeline
+  - Choose option "This project is parameterized"
+  - Add "Credential parametr" with your cloudflare_api_key, access_key and secret_key (from AWS)
+  - Copy pipeline "Change-to-green"
 
 10. Create Cloudlfare job in Jenkins for blue stack, follow this steps
- - Create new item => Pipeline
- - Choose option "This project is parameterized"
- - Add "Credential parametr" with your cloudflare_api_key, access_key and secret_key (from AWS)
- - Copy pipeline "Change-to-blue"
+  - Create new item => Pipeline
+  - Choose option "This project is parameterized"
+  - Add "Credential parametr" with your cloudflare_api_key, access_key and secret_key (from AWS)
+  - Copy pipeline "Change-to-blue"
 
  11. Run pipelines in order:
 
