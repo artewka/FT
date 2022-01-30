@@ -102,9 +102,9 @@ Go to `FT/git/terraform/vpc/variables.tf` and put to variable "bastion_ip" your 
 
  11. Run pipelines in order:
 
- 1. infrastructure run
- 2. ansible run
- 3. Change-to-green
+  - infrastructure run
+  - ansible run
+  - Change-to-green
 
  For change to blue stack run Change-to-blue pipeline
 
