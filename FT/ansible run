@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages {
+        
+        stage('Clone repo to bastion') {
+            steps {
+                git branch: 'FT', url: 'https://github.com/artewka/FT.git'
+                }
+        }
+        
+        stage('Ansible run') { 
+            steps {
+                dir('FT/git/ansible/'){
+                    ansiblePlaybook(
+                        vaultCredentialsId: 'vault',
+                        inventory: 'inventory/aws_ec2.yaml',
+                        playbook: 'srv_tasks.yml',
+                        credentialsId: 'ssh_ansible',
+                        extras: '-c paramiko'
+                    )
+                }
+            }
+        }
+    }
+}

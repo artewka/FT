@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('access_key')
+        AWS_SECRET_ACCESS_KEY = credentials('secret_key')
+    }
+    stages {
+        
+        stage('Clone') {
+            steps {
+                git branch: 'FT', url: 'https://github.com/artewka/FT.git'
+                }
+        }
+        
+        stage('Terraform start') { 
+            steps {
+                dir('FT/git/terraform/') {
+                    sh ('terraform init')
+                    echo 'Terraform action is --> ${choose}'
+                    sh ('terraform ${choose} --auto-approve') 
+                }
+            }
+         }
+    }
+}

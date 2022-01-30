@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('access_key')
+        AWS_SECRET_ACCESS_KEY = credentials('secret_key')
+        CLOUDFLARE_TOKEN      = credentials('cloudlfare_api_key')
+    }
+    stages {
+        
+        stage('Clone') {
+            steps {
+                git branch: 'FT', url: 'https://github.com/artewka/FT.git'
+                }
+        }
+        
+        stage('Choose green stack') {
+            steps {
+                dir('FT/git/switch_to_green/') {
+                    sh ("terraform init")
+                    sh ("terraform apply --auto-approve -var 'api_key=${cloudflare_token}'") 
+                }
+        }
+        
+    }
+        
+}
+}
