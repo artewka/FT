@@ -105,7 +105,7 @@ resource "aws_subnet" "Private" {
 resource "aws_subnet" "DB" {
   vpc_id                  = aws_vpc.Vpc_Ter.id
   cidr_block              = "10.0.211.0/24"
-  availability_zone       = "eu-central-1c"
+  availability_zone       = "eu-west-2c"
   map_public_ip_on_launch = "true"
   
   tags = {
