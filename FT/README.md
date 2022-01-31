@@ -69,7 +69,7 @@ Go to `FT/git/ansible/group_vars/tag_Name_db_srv` and change values for db_user 
 
 Go to `FT/git/terraform/vpc/variables.tf` and put to variable "bastion_ip" your external ip. It's will be entry point for configure infrasctructure
 
-4. Create Terraform job in Jenkins, follow this steps
+4. Create Terraform job in Jenkins, follow this steps (Note that this pipeline create already two stacks)
   - Create new item => Pipeline
   - Choose option "This project is parameterized"
   - Add "Choice parametr" and in choices field type "apply destroy"
