@@ -4,22 +4,12 @@
     name: mysql-server
     state: latest
     update_cache: yes
-    # loop:
-    #    - mysql-server
-    #    - mysql-client 
-    #    - python3-mysqldb
-    #    - libmysqlclient-dev
 
 - name: Installing Mysql
   package:
     name: python3-mysqldb
     state: latest
     update_cache: yes
-    # loop:
-    #    - mysql-server
-    #    - mysql-client 
-    #    - python3-mysqldb
-    #    - libmysqlclient-dev
      
 - name: start and enable mysql
   service:
